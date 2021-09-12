@@ -1,13 +1,32 @@
+@import url(bootstrap.min.css);
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+.icon-edit:hover,
+.lab:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+#root {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+.content {
+  flex: 1;
+}
+
+.footer-contact p {
+  padding: 10px;
+  text-align: center;
+  margin: 0;
 }
