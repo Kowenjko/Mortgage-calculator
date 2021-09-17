@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Table, Container, Button } from "react-bootstrap";
 import { Link, Redirect } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUndo } from "@fortawesome/free-solid-svg-icons";
 class AddBank extends Component {
@@ -21,13 +21,30 @@ class AddBank extends Component {
     this.setState({ [nameBank]: name });
   };
   //   ------------------------------
+  compareNumeric = (a, b) => {
+    if (a > b) return 1;
+    if (a === b) return 0;
+    if (a < b) return -1;
+  };
+  //   ------------------------------
+  sortedId = () => {
+    const { BankList } = this.props;
+    let arr = [];
+    BankList.forEach((item) => {
+      arr.push(item.id);
+    });
+    let result = arr.sort(this.compareNumeric);
+    return result[result.length - 1];
+  };
+  //   ------------------------------
   SendForm = (e) => {
     e.preventDefault();
+
     const { name, rate, max_loan, min_payment, loan_term, commission } = this.state;
     const { onAddBank } = this.props;
-    // console.log(this.props);
+    console.log(this.sortedId());
     const newBank = {
-      Id: uuidv4(),
+      Id: this.sortedId() + 1,
       name: name,
       rate: rate,
       max_loan: max_loan,

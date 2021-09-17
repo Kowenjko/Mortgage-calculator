@@ -13,11 +13,12 @@ import EditBank from "./Components/EditBank/EditBank";
 // React Router
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 //API
-import { updateBank, getAllBank } from "./Services/api-service";
+// import { updateBank, getAllBank } from "./Services/api-service";
+import { getBank, deleteBank } from "./Services/db-service";
 
 class App extends Component {
   componentDidMount() {
-    getAllBank().then((data) => {
+    getBank().then((data) => {
       if (data === null) {
         this.setState({ List: [] });
       } else {
@@ -47,12 +48,13 @@ class App extends Component {
     this.setState({
       List: tmpList,
     });
-    updateBank(tmpList);
+    // updateBank(tmpList);
   };
   // -----Delete bank------------
   onDelete = (id) => {
     const index = this.state.List.findIndex((elem) => elem.id === id);
-    // console.log(index);
+    console.log(index);
+    console.log(id);
     let partOne = this.state.List.slice(0, index);
     let partTwo = this.state.List.slice(index + 1);
     let tmpList = [...partOne, ...partTwo];
@@ -61,7 +63,7 @@ class App extends Component {
         List: tmpList,
       };
     });
-    updateBank(tmpList);
+    deleteBank(id);
   };
 
   // -----Add bank---------------
@@ -72,7 +74,7 @@ class App extends Component {
     this.setState({
       List: tmpList,
     });
-    updateBank(tmpList);
+    // updateBank(tmpList);
   };
   // -------------------------
   render() {
@@ -90,7 +92,10 @@ class App extends Component {
             )}
           />
 
-          <Route path='/addbank' render={() => <AddBank onAddBank={this.onAddBank} />} />
+          <Route
+            path='/addbank'
+            render={() => <AddBank BankList={List} onAddBank={this.onAddBank} />}
+          />
           <Route
             path='/editbank'
             render={() => <EditBank Bank={CurrentBank} onEditBank={this.onEditBank} />}

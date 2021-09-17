@@ -43,7 +43,9 @@ class EditBank extends Component {
   //   ------------------------------
   render() {
     const { IsRedirect, name, rate, max_loan, min_payment, loan_term, commission } = this.state;
+
     const { Bank } = this.props;
+    console.log(this.props);
     if (IsRedirect || Bank === null) {
       return <Redirect to='/' />;
     }
